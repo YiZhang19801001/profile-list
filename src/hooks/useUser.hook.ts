@@ -83,7 +83,7 @@ function useProfile() {
       const newUser = await usersApi.createUser(data);
       dispatch({
         type: actionTypes.INSERT_INTO_USER_LIST,
-        payload: newUser, // as requirement 1, there must have at least 15 cards, duplicate the profile array.
+        payload: newUser.data, // as requirement 1, there must have at least 15 cards, duplicate the profile array.
       });
     } catch (error) {
       console.log(error);

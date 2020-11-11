@@ -34,7 +34,7 @@ export default {
   deleteUser: async (id: number) => {
     try {
       const resp = await request.delete(`users/${id}`);
-      return { code: "200", data: resp.data };
+      return { code: "200", data: resp };
     } catch (error) {
       return { code: "500", data: error };
     }

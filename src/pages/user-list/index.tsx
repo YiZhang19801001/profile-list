@@ -1,9 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  // CreateUserButton,
-  UserList,
-  // UserForm
-} from "../../components";
+import { CreateUserButton, UserList, UserForm } from "../../components";
 import { useUser } from "../../hooks";
 import "normalize.css";
 import classes from "./index.module.scss";
@@ -16,8 +12,8 @@ const UserListPage = () => {
 
   return (
     <div className={classes.root}>
-      {/* <CreateUserButton /> */}
-      {/* <UserForm /> */}
+      <CreateUserButton />
+      <UserForm />
       <UserList />
     </div>
   );
