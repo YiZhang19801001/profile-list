@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Profile List
 
 ### This project is a simple responsive application
 

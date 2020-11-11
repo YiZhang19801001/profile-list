@@ -54,7 +54,7 @@ function ProfileInfo({ user, index }: Props) {
     });
 
   // when uploading new avatar show loading component
-  if (uploadingAvatar.status && uploadingAvatar.id === user.id)
+  if (uploadingAvatar.status && uploadingAvatar.id === user.idx)
     return (
       <div className={classes.root}>
         <UploadingComponent />

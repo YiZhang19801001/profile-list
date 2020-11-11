@@ -31,6 +31,7 @@ export interface User {
   website: string;
   company: Company;
   avatarUrl: string | null;
+  idx: number;
 }
 
 export interface UserFormValues {

@@ -68,7 +68,7 @@ const userReducer = (
       return {
         ...state,
         userList: state.userList.map((ele) => {
-          if (ele.id === action.payload.id) return action.payload;
+          if (ele.idx === action.payload.idx) return action.payload;
           return ele;
         }),
       };
@@ -76,7 +76,7 @@ const userReducer = (
       // update userList after API.DELETE success
       return {
         ...state,
-        userList: state.userList.filter((ele) => ele.id !== action.payload),
+        userList: state.userList.filter((ele) => ele.idx !== action.payload),
       };
     case ActionTypes.TOGGLE_USER_FORM:
       return {

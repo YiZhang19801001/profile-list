@@ -56,7 +56,7 @@ function UserInfo({ user }: Props) {
           <button
             onClick={(e) => {
               e.preventDefault();
-              deleteProfile(user.id);
+              deleteProfile(user.id, user.idx);
               setShowInfo(true);
             }}
           >

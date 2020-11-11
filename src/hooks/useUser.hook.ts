@@ -76,7 +76,7 @@ function useProfile() {
           type: actionTypes.SET_UPLOADING_AVATAR,
           payload: {
             status: true,
-            id,
+            id: newProfile.idx,
           },
         });
       } else {
@@ -146,8 +146,9 @@ function useProfile() {
   /**
    * function - remove profile on server
    * @param id profile id
+   * @param idx profile position in the profile list array ( because this fake env, id is not unique in the list)
    */
-  const deleteProfile = async (id: number) => {
+  const deleteProfile = async (id: number, idx: number) => {
     try {
       // trigger whole page loading page
       dispatch({
@@ -157,7 +158,7 @@ function useProfile() {
       await usersApi.deleteUser(id);
       dispatch({
         type: actionTypes.REMOVE_USER_FROM_LIST,
-        payload: id,
+        payload: idx,
       });
       // dismiss whole page loading page
       dispatch({
