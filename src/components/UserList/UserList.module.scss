@@ -1,0 +1,20 @@
+@import "../../global";
+.root {
+  display: grid;
+  min-height: 101%;
+  width: 100%;
+  height: max-content;
+  padding-bottom: 2rem;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: 1fr;
+  column-gap: 0;
+  row-gap: 1.5rem;
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1.5rem;
+  }
+  @include desktop {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1.5rem;
+  }
+}
