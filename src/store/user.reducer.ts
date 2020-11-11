@@ -87,7 +87,10 @@ const userReducer = (
     case ActionTypes.INSERT_INTO_USER_LIST:
       return {
         ...state,
-        userList: [...state.userList, action.payload],
+        userList: [
+          ...state.userList,
+          { ...action.payload, idx: state.userList.length },
+        ],
         showCreateUserForm: false,
         selectedUser: null,
       };

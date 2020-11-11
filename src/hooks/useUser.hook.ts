@@ -202,6 +202,9 @@ function useProfile() {
         payload: newUser.data,
       });
       dispatch({
+        type: actionTypes.RESET_USER_FORM,
+      });
+      dispatch({
         type: actionTypes.SET_SUMMITTING_USER_FORM,
         payload: false,
       });
