@@ -24,8 +24,8 @@
     width: 6.18rem;
     object-fit: cover;
     @include desktop {
-      height: 10.2rem;
-      width: 10.2rem;
+      height: 6.5rem;
+      width: 6.5rem;
     }
   }
   div:first-child {
@@ -40,14 +40,14 @@
     align-items: center;
     font-family: "Poppins";
     @include desktop {
-      height: 7.2rem;
-      width: 7.2rem;
-      font-size: 3rem;
+      height: 6.5rem;
+      width: 6.5rem;
+      font-size: 2rem;
     }
     &.font-size-sm {
       font-size: 1.2rem;
       @include desktop {
-        font-size: 2rem;
+        font-size: 1.5rem;
       }
     }
   }

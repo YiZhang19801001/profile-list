@@ -64,3 +64,12 @@ export interface CreateUserRequestBody {
   company: Company;
   avatarUrl: string | null;
 }
+
+export interface LoadingState {
+  loadingList: boolean;
+  uploadingAvatar: {
+    status: boolean;
+    id: number | null;
+  };
+  submittingUserForm: boolean;
+}

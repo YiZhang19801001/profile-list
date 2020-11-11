@@ -21,7 +21,7 @@ const initState: UserState = {
   showCreateUserForm: false,
 };
 
-const themeReducer = (
+const userReducer = (
   state: UserState = initState,
   action: { type: ActionTypes; payload: any }
 ): UserState => {
@@ -96,4 +96,4 @@ const themeReducer = (
   }
 };
 
-export default themeReducer;
+export default userReducer;

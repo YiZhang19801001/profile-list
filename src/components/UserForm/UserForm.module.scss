@@ -66,6 +66,9 @@
           font-size: 0.75rem;
           color: #45a7a7;
         }
+        &:disabled {
+          opacity: 0.6;
+        }
       }
     }
     button {
@@ -79,6 +82,10 @@
       color: #fff;
       outline: none;
       box-shadow: 0 0 10px #45a7a7;
+      &:disabled {
+        background-color: #45a7a7;
+        opacity: 0.6;
+      }
     }
   }
 }

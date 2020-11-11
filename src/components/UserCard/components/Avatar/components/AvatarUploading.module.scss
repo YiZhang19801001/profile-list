@@ -1,0 +1,14 @@
+.root {
+  z-index: 9999999;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  img {
+    height: 80%;
+    width: 80%;
+    max-width: 100px;
+    max-height: 100px;
+  }
+}

@@ -10,18 +10,30 @@ import React from "react";
 import { useSelector } from "react-redux";
 import classNames from "classnames";
 
-import { UserState } from "../../store/interfaces";
+import { UserState, LoadingState } from "../../store/interfaces";
 import { useUser } from "../../hooks";
 import convertUserFormValuesToProfile from "../../utils/convertUserFormValuesToProfile";
 import createNewProfileObject from "../../utils/createNewProfileObject";
 import classes from "./UserForm.module.scss";
 
 function UserForm() {
-  const { selectedUser, userFormValues, showCreateUserForm } = useSelector(
-    ({ userState }: { userState: UserState }) => ({
+  const {
+    selectedUser,
+    userFormValues,
+    showCreateUserForm,
+    submittingUserForm,
+  } = useSelector(
+    ({
+      userState,
+      loadingState,
+    }: {
+      userState: UserState;
+      loadingState: LoadingState;
+    }) => ({
       selectedUser: userState.selectedUser,
       userFormValues: userState.userFormValues,
       showCreateUserForm: userState.showCreateUserForm,
+      submittingUserForm: loadingState.submittingUserForm,
     })
   );
 
@@ -47,6 +59,13 @@ function UserForm() {
     { name: "companyPhrase", type: "text", label: "company phrase" },
   ];
 
+  // function generate button text for different situiation
+  const generateButtonText = () => {
+    if (submittingUserForm) return "Submitting...";
+    if (selectedUser === null) return "Create";
+    if (selectedUser !== null) return "Update";
+  };
+
   // conditon rendering, if application user does not want create/update any profile this form should be hidden.
   if (selectedUser === null && !showCreateUserForm) return null;
 
@@ -70,6 +89,7 @@ function UserForm() {
                 name={ele.name}
                 value={userFormValues[ele.name]}
                 onChange={updateUserFormValues}
+                disabled={submittingUserForm}
               />
               <label
                 htmlFor={ele.name}
@@ -96,8 +116,9 @@ function UserForm() {
               createUser(createNewProfileObject(userFormValues));
             }
           }}
+          disabled={submittingUserForm}
         >
-          {selectedUser === null ? "Create" : "Update"}
+          {generateButtonText()}
         </button>
       </form>
     </div>
