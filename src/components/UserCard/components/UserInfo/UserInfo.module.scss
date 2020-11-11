@@ -4,6 +4,8 @@
   border-radius: 0px 0px 1rem 1rem;
   position: relative;
   background-color: #fff;
+  height: 100%;
+  overflow: scroll;
   .control {
     background: transparent;
     height: 100%;
@@ -112,10 +114,16 @@
     .other-info {
       color: #374a59;
       margin-bottom: 0.87rem;
+      @include desktop {
+        margin-bottom: 5px;
+      }
     }
     .website {
       color: #007ae9;
       margin-bottom: 1.5rem;
+      @include desktop {
+        margin-bottom: 10px;
+      }
       a {
         text-decoration: none;
       }

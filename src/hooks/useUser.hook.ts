@@ -18,7 +18,7 @@ function useProfile() {
       // after successfully fetching users, update store state
       dispatch({
         type: actionTypes.SET_USER_LIST,
-        payload: resp.data,
+        payload: [...resp.data, ...resp.data],
       });
     } catch (error) {
       // if fetching users fail, should empty the user list

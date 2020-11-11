@@ -7,10 +7,10 @@
   box-shadow: 0 0 15px #d3d3d3;
   display: grid;
   grid-template-columns: 1fr;
-  overflow-y: scroll;
+  overflow-y: hidden;
   @include desktop {
     grid-template-columns: max-content 1fr;
-    height: 30vh;
-    overflow-y: scroll;
+    // height: 30vh;
+    overflow-y: hidden;
   }
 }

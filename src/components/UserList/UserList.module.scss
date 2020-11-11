@@ -14,7 +14,9 @@
     column-gap: 1.5rem;
   }
   @include desktop {
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 19vh);
+    column-gap: 1rem;
+    row-gap: 1rem;
   }
 }
