@@ -25,7 +25,14 @@ function UserInfo({ user }: Props) {
   const { pickProfile, deleteProfile } = useUser();
 
   return (
-    <div className={classes.root}>
+    <div
+      className={classNames([
+        classes.root,
+        {
+          [classes["stop-scroll"]]: !showInfo,
+        },
+      ])}
+    >
       {/* control panel */}
       <div
         className={classNames(classes.control, { [classes.expand]: !showInfo })}
