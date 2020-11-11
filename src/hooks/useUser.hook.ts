@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 
 import actionTypes from "../store/actionTypes";
 import { usersApi } from "../apis";
-import { User } from "../store/interfaces";
+import { User, CreateUserRequestBody } from "../store/interfaces";
 function useProfile() {
   const dispatch = useDispatch();
 
@@ -18,7 +18,7 @@ function useProfile() {
       // after successfully fetching users, update store state
       dispatch({
         type: actionTypes.SET_USER_LIST,
-        payload: [...resp.data, ...resp.data],
+        payload: [...resp.data, ...resp.data], // as requierment 1, should show min. 15 cards. this API interface only return 10 users, so duplicate values to show more cards on page.
       });
     } catch (error) {
       // if fetching users fail, should empty the user list
@@ -29,6 +29,11 @@ function useProfile() {
     }
   };
 
+  /**
+   * function - update user instance on server
+   * @param id profile id
+   * @param newProfile new profile values
+   */
   const updateProfile = async (id: number, newProfile: User) => {
     try {
       const resp = await usersApi.updateUser(id, newProfile);
@@ -45,6 +50,10 @@ function useProfile() {
     }
   };
 
+  /**
+   * function - update state.userFormValues in redux store
+   * @param e input onchange event
+   */
   const updateUserFormValues = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: actionTypes.UPDATE_USER_FORM,
@@ -52,6 +61,10 @@ function useProfile() {
     });
   };
 
+  /**
+   * function - when application user want to edit a profile, this profile will save as selectedUser in store for further use
+   * @param profile selected profile
+   */
   const pickProfile = (profile: User | null) => {
     dispatch({
       type: actionTypes.SELECT_USER,
@@ -59,6 +72,10 @@ function useProfile() {
     });
   };
 
+  /**
+   * function - remove profile on server
+   * @param id profile id
+   */
   const deleteProfile = async (id: number) => {
     try {
       await usersApi.deleteUser(id);
@@ -71,6 +88,10 @@ function useProfile() {
     }
   };
 
+  /**
+   * function - toggle userForm visibility
+   * @param flag show/hide form
+   */
   const toggleUserForm = (flag: boolean) => {
     dispatch({
       type: actionTypes.TOGGLE_USER_FORM,
@@ -78,12 +99,16 @@ function useProfile() {
     });
   };
 
-  const createUser = async (data: any) => {
+  /**
+   * function - create new user/profile instance on server
+   * @param data
+   */
+  const createUser = async (data: CreateUserRequestBody) => {
     try {
       const newUser = await usersApi.createUser(data);
       dispatch({
         type: actionTypes.INSERT_INTO_USER_LIST,
-        payload: newUser.data, // as requirement 1, there must have at least 15 cards, duplicate the profile array.
+        payload: newUser.data,
       });
     } catch (error) {
       console.log(error);

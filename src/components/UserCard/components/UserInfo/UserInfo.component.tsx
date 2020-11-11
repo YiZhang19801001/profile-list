@@ -1,3 +1,9 @@
+/**
+ * component - show profile text info
+ *             and also trigger update/remove functionalities
+ * condition rendering - when "three dot" has been clicked, control button group should be shown
+ *                        otherwise button group should be hidden.
+ */
 import React, { useState } from "react";
 import classNames from "classnames";
 
@@ -20,6 +26,7 @@ function UserInfo({ user }: Props) {
 
   return (
     <div className={classes.root}>
+      {/* control panel */}
       <div
         className={classNames(classes.control, { [classes.expand]: !showInfo })}
       >
@@ -58,6 +65,7 @@ function UserInfo({ user }: Props) {
           </button>
         </div>
       </div>
+      {/* profile info */}
       <div className={classes["personal-info"]}>
         <div className={classes.name}>
           <div>{user.name}</div>

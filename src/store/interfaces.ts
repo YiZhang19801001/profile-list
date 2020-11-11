@@ -1,3 +1,7 @@
+/**
+ * all models declared here!
+ * only shared interface should be exported
+ */
 interface Geo {
   lat: string;
   lng: string;

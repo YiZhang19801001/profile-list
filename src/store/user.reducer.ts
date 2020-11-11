@@ -25,22 +25,13 @@ const themeReducer = (
   state: UserState = initState,
   action: { type: ActionTypes; payload: any }
 ): UserState => {
-  function compare(a: User, b: User) {
-    if (a.id < b.id) {
-      return 1;
-    }
-    if (a.id > b.id) {
-      return -1;
-    }
-    return 0;
-  }
-
   switch (action.type) {
     case ActionTypes.SET_USER_LIST:
-      return { ...state, userList: action.payload.sort(compare) };
+      return { ...state, userList: action.payload };
     case ActionTypes.SELECT_USER:
       //
       if (action.payload !== null) {
+        // set userFormValues base on selected user's profile
         return {
           ...state,
           selectedUser: action.payload,
@@ -58,6 +49,7 @@ const themeReducer = (
           },
         };
       } else {
+        // reset userFormValues
         return {
           ...state,
           selectedUser: null,
@@ -72,6 +64,7 @@ const themeReducer = (
     case ActionTypes.RESET_USER_FORM:
       return { ...state, userFormValues: initUserFormValues };
     case ActionTypes.UPDATE_USER_LIST:
+      // update userList element value after API.PUT success
       return {
         ...state,
         userList: state.userList.map((ele) => {
@@ -80,6 +73,7 @@ const themeReducer = (
         }),
       };
     case ActionTypes.REMOVE_USER_FROM_LIST:
+      // update userList after API.DELETE success
       return {
         ...state,
         userList: state.userList.filter((ele) => ele.id !== action.payload),
@@ -93,7 +87,7 @@ const themeReducer = (
     case ActionTypes.INSERT_INTO_USER_LIST:
       return {
         ...state,
-        userList: [...state.userList, action.payload].sort(compare),
+        userList: [...state.userList, action.payload],
         showCreateUserForm: false,
         selectedUser: null,
       };

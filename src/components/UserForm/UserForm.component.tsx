@@ -1,3 +1,11 @@
+/**
+ * component - use for both create/update user
+ * condition rendering:
+ * if application user click "Add New User" button this form should be rendered without any data
+ *    after user entered all necessary inputs call API POST method to create new instance on server
+ *  else if application user click "Edit" button this form should be rendered with init-values same as the selected profile
+ *    after modification call API PUT method to update selected profile details
+ */
 import React from "react";
 import { useSelector } from "react-redux";
 import classNames from "classnames";
@@ -25,6 +33,7 @@ function UserForm() {
     createUser,
   } = useUser();
 
+  // input fields data, name MUST match the requestBody property name, Duplicate values Not allowed
   const inputs = [
     { name: "name", type: "text", label: "Name" },
     { name: "email", type: "text", label: "Email" },
@@ -38,12 +47,15 @@ function UserForm() {
     { name: "companyPhrase", type: "text", label: "company phrase" },
   ];
 
+  // conditon rendering, if application user does not want create/update any profile this form should be hidden.
   if (selectedUser === null && !showCreateUserForm) return null;
 
+  // main rendering
   return (
     <div
       className={classes.root}
       onClick={() => {
+        // dismiss form when margin has been clicked
         pickProfile(null);
         toggleUserForm(false);
       }}
@@ -74,11 +86,13 @@ function UserForm() {
           onClick={(e) => {
             e.preventDefault();
             if (selectedUser) {
+              // if selectedUser is not null , means application user want to update a profile
               updateProfile(
                 selectedUser.id,
                 convertUserFormValuesToProfile(userFormValues, selectedUser)
               );
             } else {
+              // if selectedUser is null, means application user want to create a new profile
               createUser(createNewProfileObject(userFormValues));
             }
           }}

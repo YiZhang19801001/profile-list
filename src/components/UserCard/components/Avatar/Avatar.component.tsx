@@ -1,3 +1,9 @@
+/**
+ *  sub-component belong to UserCard component
+ *  contain user-avartar only
+ *  position top in small screen
+ *  position left in large screen
+ */
 import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import { useUser } from "../../../../hooks";
@@ -19,7 +25,7 @@ function ProfileInfo({ user, index }: Props) {
 
   const utiliseName = () => {
     const nameArr = name.split(" ");
-    const utiliseArr = nameArr.map((str) => str.charAt(0));
+    const utiliseArr = nameArr.map((str) => str.charAt(0).toUpperCase());
     return utiliseArr.join("");
   };
 
