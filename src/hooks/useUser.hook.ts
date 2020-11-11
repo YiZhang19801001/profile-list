@@ -14,17 +14,33 @@ function useProfile() {
   // funciton - fetch users list from API and update the state in store
   const fetchProfiles = async () => {
     try {
+      // trigger whole page loading page
+      dispatch({
+        type: actionTypes.SET_LOADING_LIST,
+        payload: true,
+      });
+      // call api waiting response
       const resp = await usersApi.fetchUsers();
       // after successfully fetching users, update store state
       dispatch({
         type: actionTypes.SET_USER_LIST,
         payload: [...resp.data, ...resp.data], // as requierment 1, should show min. 15 cards. this API interface only return 10 users, so duplicate values to show more cards on page.
       });
+      // dismiss loading page
+      dispatch({
+        type: actionTypes.SET_LOADING_LIST,
+        payload: false,
+      });
     } catch (error) {
       // if fetching users fail, should empty the user list
       dispatch({
         type: actionTypes.SET_USER_LIST,
         payload: [],
+      });
+      // dismiss loading page
+      dispatch({
+        type: actionTypes.SET_LOADING_LIST,
+        payload: false,
       });
     }
   };

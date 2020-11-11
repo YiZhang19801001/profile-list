@@ -9,6 +9,9 @@
   grid-template-columns: 1fr;
   column-gap: 0;
   row-gap: 1.5rem;
+  &.blur {
+    filter: blur(10px);
+  }
   @include tablet {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 1.5rem;
