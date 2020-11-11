@@ -49,9 +49,28 @@ function useProfile() {
    * function - update user instance on server
    * @param id profile id
    * @param newProfile new profile values
+   * @param uploadingAvatar determining which loading animiation should be shown to app
    */
-  const updateProfile = async (id: number, newProfile: User) => {
+  const updateProfile = async (
+    id: number,
+    newProfile: User,
+    uploadingAvatar?: boolean
+  ) => {
     try {
+      if (uploadingAvatar) {
+        dispatch({
+          type: actionTypes.SET_UPLOADING_AVATAR,
+          payload: {
+            status: true,
+            id,
+          },
+        });
+      } else {
+        dispatch({
+          type: actionTypes.SET_SUMMITTING_USER_FORM,
+          payload: true,
+        });
+      }
       const resp = await usersApi.updateUser(id, newProfile);
       dispatch({
         type: actionTypes.SELECT_USER,
@@ -61,8 +80,30 @@ function useProfile() {
         type: actionTypes.UPDATE_USER_LIST,
         payload: resp.data,
       });
+      dispatch({
+        type: actionTypes.SET_SUMMITTING_USER_FORM,
+        payload: false,
+      });
+      dispatch({
+        type: actionTypes.SET_UPLOADING_AVATAR,
+        payload: {
+          status: false,
+          id: null,
+        },
+      });
     } catch (error) {
       console.log(error);
+      dispatch({
+        type: actionTypes.SET_SUMMITTING_USER_FORM,
+        payload: false,
+      });
+      dispatch({
+        type: actionTypes.SET_UPLOADING_AVATAR,
+        payload: {
+          status: false,
+          id: null,
+        },
+      });
     }
   };
 

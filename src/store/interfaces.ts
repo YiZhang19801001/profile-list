@@ -67,6 +67,9 @@ export interface CreateUserRequestBody {
 
 export interface LoadingState {
   loadingList: boolean;
-  uploadingAvatar: boolean;
+  uploadingAvatar: {
+    status: boolean;
+    id: number | null;
+  };
   submittingUserForm: boolean;
 }

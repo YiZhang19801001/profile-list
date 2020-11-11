@@ -6,8 +6,11 @@
  */
 import React, { useEffect, useState } from "react";
 import classNames from "classnames";
+import { useSelector } from "react-redux";
+
 import { useUser } from "../../../../hooks";
-import { User } from "../../../../store/interfaces";
+import { User, LoadingState } from "../../../../store/interfaces";
+import UploadingComponent from "./components/AvatarUploading.component";
 import classes from "./Avatar.module.scss";
 
 interface Props {
@@ -18,6 +21,11 @@ interface Props {
 function ProfileInfo({ user, index }: Props) {
   const { avatarUrl, id, name } = user;
   const [showAvatar, setShowAvatar] = useState(true);
+  const { uploadingAvatar } = useSelector(
+    ({ loadingState }: { loadingState: LoadingState }) => ({
+      uploadingAvatar: loadingState.uploadingAvatar,
+    })
+  );
   const { updateProfile } = useUser();
   const onError = () => {
     setShowAvatar(false);
@@ -45,6 +53,15 @@ function ProfileInfo({ user, index }: Props) {
       reader.onerror = (error) => reject(error);
     });
 
+  // when uploading new avatar show loading component
+  if (uploadingAvatar.status && uploadingAvatar.id === user.id)
+    return (
+      <div className={classes.root}>
+        <UploadingComponent />
+      </div>
+    );
+
+  // main render
   return (
     <div className={classes.root}>
       {user.id <= 10 && (
@@ -55,7 +72,7 @@ function ProfileInfo({ user, index }: Props) {
           onChange={async (e) => {
             if (e.target.files) {
               const result = await toBase64(e.target.files[0]);
-              updateProfile(id, { ...user, avatarUrl: result as string });
+              updateProfile(id, { ...user, avatarUrl: result as string }, true);
             }
           }}
         />

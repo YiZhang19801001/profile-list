@@ -4,7 +4,10 @@ import { LoadingState } from "./interfaces";
 const initState: LoadingState = {
   loadingList: false,
   submittingUserForm: false,
-  uploadingAvatar: false,
+  uploadingAvatar: {
+    status: false,
+    id: null,
+  },
 };
 
 const loadingReducer = (
