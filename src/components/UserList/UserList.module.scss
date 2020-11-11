@@ -15,7 +15,7 @@
   }
   @include desktop {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(5, 19vh);
+    grid-template-rows: auto;
     column-gap: 1rem;
     row-gap: 1rem;
   }

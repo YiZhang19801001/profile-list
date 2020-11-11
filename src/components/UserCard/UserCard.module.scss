@@ -10,7 +10,7 @@
   overflow-y: hidden;
   @include desktop {
     grid-template-columns: max-content 1fr;
-    // height: 30vh;
+    height: 19vh;
     overflow-y: hidden;
   }
 }
