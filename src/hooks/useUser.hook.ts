@@ -135,13 +135,28 @@ function useProfile() {
    */
   const deleteProfile = async (id: number) => {
     try {
+      // trigger whole page loading page
+      dispatch({
+        type: actionTypes.SET_LOADING_LIST,
+        payload: true,
+      });
       await usersApi.deleteUser(id);
       dispatch({
         type: actionTypes.REMOVE_USER_FROM_LIST,
         payload: id,
       });
+      // dismiss whole page loading page
+      dispatch({
+        type: actionTypes.SET_LOADING_LIST,
+        payload: false,
+      });
     } catch (error) {
       console.log(error);
+      // dismiss whole page loading page
+      dispatch({
+        type: actionTypes.SET_LOADING_LIST,
+        payload: false,
+      });
     }
   };
 
@@ -162,13 +177,25 @@ function useProfile() {
    */
   const createUser = async (data: CreateUserRequestBody) => {
     try {
+      dispatch({
+        type: actionTypes.SET_SUMMITTING_USER_FORM,
+        payload: true,
+      });
       const newUser = await usersApi.createUser(data);
       dispatch({
         type: actionTypes.INSERT_INTO_USER_LIST,
         payload: newUser.data,
       });
+      dispatch({
+        type: actionTypes.SET_SUMMITTING_USER_FORM,
+        payload: false,
+      });
     } catch (error) {
       console.log(error);
+      dispatch({
+        type: actionTypes.SET_SUMMITTING_USER_FORM,
+        payload: false,
+      });
     }
   };
 
