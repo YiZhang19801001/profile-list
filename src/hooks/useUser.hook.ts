@@ -22,10 +22,24 @@ function useProfile() {
       // call api waiting response
       const resp = await usersApi.fetchUsers();
       // after successfully fetching users, update store state
-      dispatch({
-        type: actionTypes.SET_USER_LIST,
-        payload: [...resp.data, ...resp.data], // as requierment 1, should show min. 15 cards. this API interface only return 10 users, so duplicate values to show more cards on page.
-      });
+      if (resp && resp.code === "200") {
+        dispatch({
+          type: actionTypes.SET_USER_LIST,
+          payload: [
+            ...resp.data.map((x: any, idx: number) => ({ ...x, idx })),
+            ...resp.data.map((x: any, idx: number) => ({
+              ...x,
+              idx: idx + resp.data.length,
+            })),
+          ], // as requierment 1, should show min. 15 cards. this API interface only return 10 users, so duplicate values to show more cards on page.
+        });
+      } else {
+        // if fetching users fail, should empty the user list
+        dispatch({
+          type: actionTypes.SET_USER_LIST,
+          payload: [],
+        });
+      }
       // dismiss loading page
       dispatch({
         type: actionTypes.SET_LOADING_LIST,

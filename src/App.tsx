@@ -5,9 +5,15 @@
  */
 import React from "react";
 import { UserListPage } from "./pages";
+import { AppCover } from "./components";
 import "./App.module.scss";
 function App() {
-  return <UserListPage />;
+  return (
+    <>
+      <AppCover />
+      <UserListPage />
+    </>
+  );
 }
 
 export default App;

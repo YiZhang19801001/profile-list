@@ -23,13 +23,21 @@ function UserList() {
   return (
     <>
       <WholePageLoading />
-      <div
-        className={classNames([classes.root, { [classes.blur]: loadingList }])}
-      >
-        {userList.map((user: User, idx: number) => {
-          return <UserCard key={`user-card-${idx}`} user={user} index={idx} />;
-        })}
-      </div>
+      {userList.length <= 0 && <div>No data...</div>}
+      {userList.length > 0 && (
+        <div
+          className={classNames([
+            classes.root,
+            { [classes.blur]: loadingList },
+          ])}
+        >
+          {userList.map((user: User, idx: number) => {
+            return (
+              <UserCard key={`user-card-${idx}`} user={user} index={idx} />
+            );
+          })}
+        </div>
+      )}
     </>
   );
 }
